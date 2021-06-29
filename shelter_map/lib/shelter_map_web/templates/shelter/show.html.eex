@@ -1,0 +1,43 @@
+<h1>Show Shelter</h1>
+
+<ul>
+
+  <li>
+    <strong>Address:</strong>
+    <%= @shelter.address %>
+  </li>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @shelter.code %>
+  </li>
+
+  <li>
+    <strong>Municipality:</strong>
+    <%= @shelter.municipality %>
+  </li>
+
+  <li>
+    <strong>Lat:</strong>
+    <%= @shelter.lat %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @shelter.lng %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @shelter.name %>
+  </li>
+
+  <li>
+    <strong>Prefecture:</strong>
+    <%= @shelter.prefecture %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.shelter_path(@conn, :edit, @shelter) %></span>
+<span><%= link "Back", to: Routes.shelter_path(@conn, :index) %></span>

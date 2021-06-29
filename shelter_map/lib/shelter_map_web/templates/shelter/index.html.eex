@@ -1,0 +1,52 @@
+<h1>Listing Shelters</h1>
+<div id="map"></div>
+<script>
+var map = L.map('map').setView([35.685344, 139.739763], 6);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+  <%= for shelter <- @shelters do %>
+    L.marker([<%= shelter.lat %>, <%= shelter.lng %>]).addTo(map)
+      .bindPopup('<%= shelter.address %>')
+      .openPopup();
+  <% end %>
+  </script>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Code</th>
+      <th>Municipality</th>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th>Name</th>
+      <th>Prefecture</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for shelter <- @shelters do %>
+    <tr>
+      <td><%= shelter.address %></td>
+      <td><%= shelter.code %></td>
+      <td><%= shelter.municipality %></td>
+      <td><%= shelter.lat %></td>
+      <td><%= shelter.lng %></td>
+      <td><%= shelter.name %></td>
+      <td><%= shelter.prefecture %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.shelter_path(@conn, :show, shelter) %></span>
+        <span><%= link "Edit", to: Routes.shelter_path(@conn, :edit, shelter) %></span>
+        <span><%= link "Delete", to: Routes.shelter_path(@conn, :delete, shelter), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Shelter", to: Routes.shelter_path(@conn, :new) %></span>
